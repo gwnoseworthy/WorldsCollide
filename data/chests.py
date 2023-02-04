@@ -112,6 +112,8 @@ class Chests():
                     continue
                 item = Item(chest.contents, self.rom)
                 if item.is_trash:
+                    if not item.sell_gold_value:
+                        chest.type = Chest.EMPTY
                     chest.type = Chest.GOLD
                     chest.contents = item.sell_gold_value
 
