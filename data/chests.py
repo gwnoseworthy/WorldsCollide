@@ -1,5 +1,6 @@
 from data.chest import Chest
 import data.chests_asm as chests_asm
+from data.item import Item
 from data.structures import DataArrays
 import random
 
@@ -104,6 +105,16 @@ class Chests():
                 chest.randomize_gold()
             elif chest.type == Chest.ITEM:
                 chest.contents = self.items.get_random()
+
+        if self.args.no_trash_items:
+            for chest in possible_chests:
+                if not chest.type == Chest.ITEM:
+                    continue
+                item = Item(chest.contents, self.rom)
+                if item.is_trash:
+                    chest.type = Chest.GOLD
+                    chest.contents = item.sell_gold_value
+
 
     def random_tiered(self):
         def get_item(tiers, tier_s_distribution):
