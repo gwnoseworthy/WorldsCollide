@@ -307,7 +307,8 @@ TRASH_WEAPONS = [
 
 TRASH_ARMOR = ["Buckler", "Mithril Shld", "Heavy Shld", "Gold Shld", "Leather Hat", "Plumed Hat", "Bandana",
                "Iron Helmet", "Mithril Helm", "Gold Helmet", "LeatherArmor", "Kung Fu Suit", "Mithril Vest",
-               "Diamond Vest", "Cotton Robe", "Silk Robe", "Iron Armor", "DiamondArmor", "Crystal Mail",
+               "Diamond Vest", "Cotton Robe", "Silk Robe", "Iron Armor",
+               "DiamondArmor", "Crystal Mail", "Gold Armor",
                "Mithril Mail"
 ]
 TRASH_RElICS = ["Charm Bangle", "Coin Toss", "FakeMustache"]
