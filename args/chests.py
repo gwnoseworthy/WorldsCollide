@@ -66,6 +66,10 @@ def options(args):
         result.append(("Random Percent", f"{args.chest_contents_shuffle_random_percent}%"))
     result.append(("Monsters-In-A-Box Shuffled", args.chest_monsters_shuffle))
 
+    if args.no_trash_chests:
+        result.append(("No Trash Chests", args.no_trash_chests))
+
+
     return result
 
 def menu(args):

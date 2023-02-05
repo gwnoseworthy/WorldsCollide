@@ -165,6 +165,7 @@ def options(args):
         ("Expensive Balls", args.shops_expensive_super_balls),
         ("No Exp. Eggs", args.shops_no_exp_eggs),
         ("No Illuminas", args.shops_no_illuminas),
+        ("No Trash Shops", args.no_trash_shops)
     ])
     return result
 
