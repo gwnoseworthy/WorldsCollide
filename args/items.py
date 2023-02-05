@@ -49,8 +49,11 @@ def parse(parser):
     items.add_argument("-saw", "--stronger-atma-weapon", action = "store_true",
                        help = "Atma Weapon moved to higher tier and divisor reduced from 64 to 32")
 
-    items.add_argument("-nti", "--no-trash-items",  action = "store_true",
-                       help="Replace Low Tier Items with gold in chests and skip adding to shop lists")
+    items.add_argument("-ntc", "--no-trash-chests",  action = "store_true",
+                       help="Replace Low Tier Items with gold in chests")
+
+    items.add_argument("-nts", "--no-trash-shops",  action = "store_true",
+                       help="Omit Low tier items in shops")
 
 def process(args):
     args._process_min_max("item_equipable_random")
@@ -110,9 +113,10 @@ def flags(args):
 
     if args.stronger_atma_weapon:
         flags += " -saw"
-    if args.no_trash_items:
-        flags += " -nti"
-
+    if args.no_trash_chests:
+        flags += " -ntc"
+    if args.no_trash_shops:
+        flags += " -nts"
     return flags
 
 def options(args):

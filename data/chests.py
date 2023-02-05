@@ -106,7 +106,7 @@ class Chests():
             elif chest.type == Chest.ITEM:
                 chest.contents = self.items.get_random()
 
-        if self.args.no_trash_items:
+        if self.args.no_trash_chests:
             for chest in possible_chests:
                 if not chest.type == Chest.ITEM:
                     continue
