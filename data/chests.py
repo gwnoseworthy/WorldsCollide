@@ -107,15 +107,24 @@ class Chests():
                 chest.contents = self.items.get_random()
 
         if self.args.no_trash_chests:
+            if self.args.shop_sell_fraction4:
+                sell_factor = 1/4
+            elif self.args.shop_sell_fraction8:
+                sell_factor = 1 / 8
+            elif self.args.shop_sell_fraction0:
+                sell_factor = 0
+            else:
+                sell_factor = 1/2
             for chest in possible_chests:
                 if not chest.type == Chest.ITEM:
                     continue
                 item = Item(chest.contents, self.rom)
                 if item.is_trash:
+                    item_chest_value = int(min((item.price * sell_factor)//100, Chest.MAX_GOLD_VALUE))
                     if not item.sell_gold_value:
                         chest.type = Chest.EMPTY
                     chest.type = Chest.GOLD
-                    chest.contents = item.sell_gold_value
+                    chest.contents = item_chest_value
 
 
     def random_tiered(self):
