@@ -222,6 +222,14 @@ class NarsheWOR(Event):
         ])
 
     def cursed_shield_mod(self):
-        self.dialogs.set_text(1523, f"“Cursed Shld”…{self.items.cursed_shield_battles}<end>")
+
+        if not self.items.cursed_shield_battles:
+            ## If cursed shield battles spawns at 0 give paladin shield
+            space = Reserve(0xc0b85, 0xc0b86, "narshe cursed shield_reward")
+            space.write(field.AddItem(103, False))
+            dialog = f"May this shield protect you<end>"
+        else:
+            dialog = f"“Cursed Shld”…{self.items.cursed_shield_battles}<end>"
+        self.dialogs.set_text(1523, dialog)
         if not self.args.cursed_shield_battles_original:
             self.log_change("Cursed Shield 256", self.items.cursed_shield_battles)
