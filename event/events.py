@@ -1,3 +1,4 @@
+from data.characters import Characters
 from memory.space import Bank, Allocate
 from event.event_reward import CHARACTER_ESPER_ONLY_REWARDS, RewardType, choose_reward, weighted_reward_choice
 import instruction.field as field
@@ -36,6 +37,12 @@ class Events():
                 if event_name.lower() != module_name.replace('_', '').lower():
                     continue
                 event = event_class(name_event, self.rom, self.args, self.dialogs, self.characters, self.items, self.maps, self.enemies, self.espers, self.shops)
+                if self.args.character_list:
+                    ## TODO: using namedata is fragile.
+                    if event._character_gate and  event.character_gate() not in self.characters.playable_id_list:
+                        ## Special handlig for semi gated objective
+                        if not event.name() == 'Doom Gaze':
+                            continue
                 events.append(event)
                 name_event[event.name()] = event
 

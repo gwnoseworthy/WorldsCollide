@@ -1,6 +1,5 @@
 from memory.space import Bank, Space, Reserve, Allocate, Free, Write, Read
 import data.direction as direction
-
 import data.event_bit as event_bit
 import data.event_word as event_word
 import data.npc_bit as npc_bit
@@ -16,6 +15,9 @@ from instruction.event import EVENT_CODE_START
 from event.event_reward import RewardType, Reward
 
 class Event():
+
+    CHARACTER_GATE = None
+
     def __init__(self, events, rom, args, dialogs, characters, items, maps, enemies, espers, shops):
         self.events = events
         self.rom = rom
@@ -31,6 +33,8 @@ class Event():
 
         self.rewards_log = []
         self.changes_log = []
+        ## TODO: Replace all character_gate calls with property call.
+        self._character_gate = self.character_gate()
 
     def name(self):
         raise NotImplementedError(self.__class__.__name__ + " event name")

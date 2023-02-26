@@ -10,6 +10,7 @@ class Character():
     def __init__(self, id, init_data, name_data):
         self.id = id
         self.name = text.get_string(name_data, text.TEXT2).rstrip('\0')
+        self.init_name = text.get_string(name_data, text.TEXT2).rstrip('\0')
 
         self.init_extra_hp      = init_data[0]
         self.init_extra_mp      = init_data[1]

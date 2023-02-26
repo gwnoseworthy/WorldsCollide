@@ -1,5 +1,5 @@
 from event.event import *
-
+from data.characters import Characters
 # TODO game can freeze, is this something i did or a bug in emulator/game?
 #      go through and when you get to the hole that brings you to three possible holes (including the one you came from)
 #      go thruogh left hole, hit both switches and go back through the hole you came from
@@ -8,6 +8,8 @@ from event.event import *
 #      going in that hole will freeze
 
 class FloatingContinent(Event):
+    CHARACTER_GATE = Characters.SHADOW
+
     def name(self):
         return "Floating Continent"
 

@@ -8,6 +8,8 @@ from data.party_battle_scripts import PartyBattleScripts
 from data.structures import DataArray
 
 import data.characters_asm as characters_asm
+from utils.decoders import get_characters
+
 
 class Characters():
     CHARACTER_COUNT = 14   # 14 playable characters
@@ -39,8 +41,12 @@ class Characters():
         for character_index in range(len(self.name_data)):
             character = Character(character_index, self.init_data[character_index], self.name_data[character_index])
             self.characters.append(character)
-
-        self.playable = self.characters[:self.CHARACTER_COUNT]
+        if args.character_list:
+            avalable_chars = get_characters(args.character_list)
+            self.playable = [c for c in self.characters if c.name in avalable_chars]
+        else:
+            self.playable = self.characters[:self.CHARACTER_COUNT]
+        self.playable_id_list = [c.id for c in self.playable]
 
         self.natural_magic = NaturalMagic(self.rom, self.args, self, spells)
         self.commands = Commands(self.characters)
@@ -51,11 +57,11 @@ class Characters():
 
         self.battle_scripts = PartyBattleScripts(self.rom, self.args, self)
 
-        self.available_characters = list(range(self.CHARACTER_COUNT))
-
+        # self.available_characters = list(range(self.CHARACTER_COUNT))
+        self.available_characters = [c.id for c in self.playable]
         # path of characters required to unlock each character
         # e.g. self.character_paths[self.TERRA] = all characters required for terra (in order)
-        self.character_paths = [[] for char_index in range(self.CHARACTER_COUNT)]
+        self.character_paths = [[] for char_index in range(self.CHARACTER_COUNT) if char_index in self.playable_id_list]
 
     def get_available_count(self):
         return len(self.available_characters)
@@ -106,7 +112,7 @@ class Characters():
         command_id = name_id[command_name]
 
         result = []
-        for character in self.characters:
+        for character in self.playable:
             if command_id in character.commands:
                 result.append(character.id)
         return result

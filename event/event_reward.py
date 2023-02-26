@@ -1,4 +1,10 @@
 from enum import Flag, unique, auto
+
+from constants.items import id_name
+from data.characters import Characters
+from data.espers import Espers
+
+
 @unique
 class RewardType(Flag):
     NONE = auto()
@@ -14,11 +20,23 @@ class Reward:
         self.event = event
         self.possible_types = possible_types
 
+    @property
+    def readable_reward(self):
+        if not self.type:
+            return
+        if self.type == RewardType.CHARACTER:
+            return Characters.DEFAULT_NAME[self.id]
+        if self.type == RewardType.ESPER:
+            return Espers.esper_names[self.id]
+        if self.type == RewardType.ITEM:
+            return id_name[self.id]
+
+
     def single_possible_type(self):
         return self.possible_types in RewardType
 
     def __str__(self):
-        result = f"{self.id} {self.type} {self.event.name()}"
+        result = f"{self.id}: {self.readable_reward} {self.type} {self.event.name()}"
 
         possible_strings = []
         if self.possible_types & RewardType.CHARACTER:

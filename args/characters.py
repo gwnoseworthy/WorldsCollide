@@ -1,7 +1,13 @@
+from utils.decoders import get_characters
+
+
 def name():
     return "Characters"
 
 def parse(parser):
+    ## NOTE: Used to parse hex input values
+    def auto_int(x):
+        return int(x, 0)
     characters = parser.add_argument_group("Characters")
 
     characters.add_argument("-sal", "--start-average-level", action = "store_true",
@@ -15,6 +21,8 @@ def parse(parser):
     characters.add_argument("-csrp", "--character-stat-random-percent", default = [100, 100], type = int,
                             nargs = 2, metavar = ("MIN", "MAX"), choices = range(201),
                             help = "Each character stat set to random percent of original within given range ")
+
+    characters.add_argument("-clist", '--character-list', type=auto_int)
 
 def process(args):
     args._process_min_max("character_stat_random_percent")
@@ -32,7 +40,8 @@ def flags(args):
         flags += " -eu"
     if args.character_stat_random_percent_min != 100 or args.character_stat_random_percent_max != 100:
         flags += f" -csrp {args.character_stat_random_percent_min} {args.character_stat_random_percent_max}"
-
+    if args.character_list:
+        flags +=f" -clist {' '.join(get_characters(args.character_list))}"
     return flags
 
 def options(args):
@@ -44,6 +53,7 @@ def options(args):
         ("Start Naked", args.start_naked),
         ("Equipable Umaro", args.equipable_umaro),
         ("Character Stats", character_stats),
+        ("Character List",  "".join(c[:2].title() for c in get_characters(args.character_list)))
     ]
 
 def menu(args):

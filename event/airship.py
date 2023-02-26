@@ -93,7 +93,7 @@ class Airship(Event):
             field.BranchIfEventBitSet(event_bit.IN_WOR, wor_control_checks),
             field.BranchIfEventBitSet(event_bit.FINISHED_FLOATING_CONTINENT, fly_wor_cancel_choice),
         )
-        if self.args.character_gating:
+        if self.args.character_gating and self.events.get("Floating Continent"):
             space.write(
                 field.BranchIfEventBitClear(event_bit.character_recruited(self.events["Floating Continent"].character_gate()),
                                             fly_wor_cancel_choice),
