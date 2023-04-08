@@ -299,10 +299,10 @@ good_items = [
 ## TRASH LIST https://docs.google.com/spreadsheets/d/1Cit5Xl_TCBPFI4q1NEVQhSYGH1wKY9st_1yee3lzCP8/edit#gid=0
 
 TRASH_WEAPONS = [
-    "Dirk", "MithrilKnife", "Guardian", "MithrilBlade", "RegalCutlass", "Crystal", "Ogre Nix", "Mithril Pike",
-    "Stout Spear", "Gold Lance", "Partisan", "Imperial", "Kodachi", "Hardened", "Ashura", "Kotetsu", "Forged",
-    "Aura", "Strato", "Poison Rod", "Punisher", "Gravity Rod", "MetalKnuckle", "Mithril Claw", "Kaiser",
-    "Flail", "Morning Star", "Full Moon", "Boomerang", "Rising Sun", "Cards", "Darts", "Chocobo Brsh", "DaVinci Brsh"
+    "Dirk", "MithrilKnife", "Guardian", "MithrilBlade", "RegalCutlass", "Crystal", "Mithril Pike",
+    "Stout Spear",  "Imperial", "Kodachi", "Hardened", "Ashura", "Kotetsu", "Forged",
+    "Aura", "Strato", "Punisher", "MetalKnuckle", "Mithril Claw", "Kaiser",
+    "Flail", "Morning Star", "Full Moon", "Boomerang", "Rising Sun", "Cards", "Darts", "Chocobo Brsh",
     ]
 
 TRASH_ARMOR = ["Buckler", "Mithril Shld", "Heavy Shld", "Gold Shld", "Leather Hat", "Plumed Hat", "Bandana",
