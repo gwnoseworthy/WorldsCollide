@@ -1,6 +1,6 @@
 from event.event import *
 from event.veldt_helpers import *
-
+from instruction.c1 import init_mods as c1_space_making_mods
 # NOTE: if gau in menus he has been recruited (will not change based on leap status)
 #       if gau not in menus he has not been recruited yet
 #       if gau is available it also means he is not leapt
@@ -28,6 +28,7 @@ class Veldt(Event):
             )
 
     def mod(self):
+        c1_space_making_mods()
         self.leap_char = self.characters.get_characters_with_command("Leap")
         if not self.leap_char:
             self.leap_char = self.characters.GAU

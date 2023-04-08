@@ -11,7 +11,7 @@ def _color_absolute_addition_mod():
         asm.RTS(),
     )
     Free(space.end_address + 1, 0x1fd66)
-color_absolute_addition = _color_absolute_addition_mod()
+
 
 def _color_absolute_subtraction_mod():
     import instruction.f0 as f0
@@ -23,7 +23,8 @@ def _color_absolute_subtraction_mod():
         asm.RTS(),
     )
     Free(space.end_address + 1, 0x1fcff)
-color_absolute_subtraction = _color_absolute_subtraction_mod()
+
+
 
 def _display_multi_line_dialog_mod():
     # input: x = dialog id * 2
@@ -47,4 +48,10 @@ def _display_multi_line_dialog_mod():
     ]
     space = Write(Bank.C1, src, "battle event display multi line dialog")
     return space.start_address
-display_multi_line_dialog = _display_multi_line_dialog_mod()
+
+
+def init_mods():
+    _color_absolute_addition_mod()
+    _color_absolute_subtraction_mod()
+    _display_multi_line_dialog_mod()
+
