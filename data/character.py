@@ -34,6 +34,9 @@ class Character():
         self._init_level_factor = (init_data[21] & 0x0c) >> 2
         self._cant_reequip      = (init_data[21] & 0x10) >> 4
 
+    def __repr__(self):
+        return f"{self.id}: {self.name} - {self.init_name}"
+
     def init_data(self):
         from data.characters import Characters
         init_data = [0x00] * Characters.INIT_DATA_SIZE
