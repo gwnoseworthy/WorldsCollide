@@ -47,14 +47,20 @@ def flags(args):
 def options(args):
     character_stats = f"{args.character_stat_random_percent_min}-{args.character_stat_random_percent_max}%"
 
-    return [
+    options =  [
         ("Start Average Level", args.start_average_level),
         ("Start Level", args.start_level),
         ("Start Naked", args.start_naked),
         ("Equipable Umaro", args.equipable_umaro),
         ("Character Stats", character_stats),
-        ("Character List",  "".join(c[:2].title() for c in get_characters(args.character_list)))
+
     ]
+
+    if args.character_list:
+        options.append(("Character List", "".join(c[:2].title() for c in get_characters(args.character_list))))
+
+    return options
+
 
 def menu(args):
     entries = options(args)

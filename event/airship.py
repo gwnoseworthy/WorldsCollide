@@ -77,7 +77,7 @@ class Airship(Event):
 
         # airship wor controls branching
         wor_control_checks = space.next_address
-        if self.args.character_gating:
+        if self.args.character_gating and self.events.get("Doom Gaze"):
             space.write(
                 field.BranchIfEventBitClear(event_bit.character_recruited(self.events["Doom Gaze"].character_gate()),
                                             fly_wob_cancel_choice),

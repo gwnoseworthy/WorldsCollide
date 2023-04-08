@@ -43,7 +43,8 @@ class Characters():
             self.characters.append(character)
         if args.character_list:
             avalable_chars = get_characters(args.character_list)
-            self.playable = [c for c in self.characters if c.name in avalable_chars]
+            # NOTE the indexing on self.characters is to remove temporary npcs.
+            self.playable = [c for c in self.characters[:self.CHARACTER_COUNT] if c.name in avalable_chars]
         else:
             self.playable = self.characters[:self.CHARACTER_COUNT]
         self.playable_id_list = [c.id for c in self.playable]
@@ -61,7 +62,8 @@ class Characters():
         self.available_characters = [c.id for c in self.playable]
         # path of characters required to unlock each character
         # e.g. self.character_paths[self.TERRA] = all characters required for terra (in order)
-        self.character_paths = [[] for char_index in range(self.CHARACTER_COUNT) if char_index in self.playable_id_list]
+        # self.character_paths = [[] for char_index in range(self.CHARACTER_COUNT) if char_index in self.playable_id_list]
+        self.character_paths = [[] for char_index in range(self.CHARACTER_COUNT)]
 
     def get_available_count(self):
         return len(self.available_characters)

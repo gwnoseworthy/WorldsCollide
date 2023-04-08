@@ -82,12 +82,12 @@ class Items():
 
                     # assign character group to current item
                     for character in character_group:
-                        item.add_equipable_character(self.characters.playable[character])
+                        item.add_equipable_character(self.characters.get(character))
                 else:
                     character_group = random.sample(possible_characters, characters_per_item)
                     for character in character_group:
                         possible_characters.remove(character)
-                        item.add_equipable_character(self.characters.playable[character])
+                        item.add_equipable_character(self.characters.get(character))
 
     def equipable_original_random(self, type_condition, percent):
         if percent == 0:
@@ -109,7 +109,7 @@ class Items():
         for item in self.items:
             if item.is_equipable() and item.id != self.EMPTY and type_condition(item.type):
                 for character in range(Characters.CHARACTER_COUNT):
-                    if item.equipable_by(self.characters.playable[character]):
+                    if item.equipable_by(self.characters.get(character)):
                         equipable[character].append(item)
                 item.remove_all_equipable_characters()
 
@@ -117,7 +117,7 @@ class Items():
 
         for character in range(Characters.CHARACTER_COUNT):
             for item in equipable[character]:
-                item.add_equipable_character(self.characters.playable[character])
+                item.add_equipable_character(self.characters.get(character))
 
         self.equipable_original_random(type_condition, percent)
 
@@ -138,7 +138,7 @@ class Items():
         rage_characters = self.characters.get_characters_with_command("Rage")
         atma_weapon = self.items[name_id["Atma Weapon"]]
         for character in rage_characters:
-            atma_weapon.remove_equipable_character(self.characters.playable[character])
+            atma_weapon.remove_equipable_character(self.characters.get(character))
 
     def get_price(self, id):
         return self.items[id].price

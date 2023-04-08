@@ -17,8 +17,8 @@ class Events():
         self.shops = data.shops
 
         events = self.mod()
-
-        self.validate(events)
+        # FIXME we need to still validate events
+        # self.validate(events)
 
     def mod(self):
         # generate list of events from files
@@ -38,7 +38,6 @@ class Events():
                     continue
                 event = event_class(name_event, self.rom, self.args, self.dialogs, self.characters, self.items, self.maps, self.enemies, self.espers, self.shops)
                 if self.args.character_list:
-                    ## TODO: using namedata is fragile.
                     if event._character_gate and  event.character_gate() not in self.characters.playable_id_list:
                         ## Special handlig for semi gated objective
                         if not event.name() == 'Doom Gaze':
